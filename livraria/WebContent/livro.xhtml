@@ -15,7 +15,7 @@
 	
 
 		<ui:define name="titulo">
-				Novo Livro
+				Novo Livro				
 		</ui:define>
 
 		<ui:define name="conteudo">
@@ -68,7 +68,7 @@
 						<h:outputText value="#{autor.nome}" />
 					</p:column>
 					<p:column>
-						<p:commandLink value="X" action="#{livroBean.removerAutorDoLivro(autor)}" update="tabelaAutores" process="@this" />
+						<p:commandLink value="Apaga" action="#{livroBean.removerAutorDoLivro(autor)}" update="tabelaAutores" process="@this" />
 					</p:column>
 				</p:dataTable>
 
@@ -103,12 +103,12 @@
 				
 				<p:column>
 					<f:facet name="header">Alterar</f:facet>
-					<h:commandLink value="altera" action="#{livroBean.carregar(livro)}"/>
+					<h:commandLink value="Altera" action="#{livroBean.carregar(livro)}"/>
 				</p:column>					
 				
 				<p:column>
 					<f:facet name="header">Remover</f:facet>
-					<h:commandLink value="remove" action="#{livroBean.remover(livro)}"/>
+					<h:commandLink value="Remove" action="#{livroBean.remover(livro)}"/>
 				</p:column>	
 			</p:dataTable>
 			</h:form>			
