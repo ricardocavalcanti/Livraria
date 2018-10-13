@@ -1,2 +1,2 @@
 # livraria
-Projeto livraria JPA+JSF+PRIME+CDI
+Projeto livraria JPA+JSF+PRIMEFACES+CDI
