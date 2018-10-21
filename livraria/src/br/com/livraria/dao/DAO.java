@@ -9,88 +9,66 @@ import javax.persistence.criteria.CriteriaQuery;
 public class DAO<T> {
 
 	private final Class<T> classe;
-	private EntityManager em;
+	private EntityManager manager;
 
 	public DAO(EntityManager manager, Class<T> classe) {
-		
-		this.em = manager;
+
+		this.manager = manager;
 		this.classe = classe;
 	}
 
 	public void adiciona(T t) {
-
-		// consegue a entity manager
-		//EntityManager em = new JPAUtil().getEntityManager();
-
-		// abre transacao
-		em.getTransaction().begin();
-
 		// persiste o objeto
-		em.persist(t);
+		manager.persist(t);
 
-		// commita a transacao
-		em.getTransaction().commit();
-
-		// fecha a entity manager
-		//em.close();
 	}
 
 	public void remove(T t) {
-		//EntityManager em = new JPAUtil().getEntityManager();
-		em.getTransaction().begin();
 
-		em.remove(em.merge(t));
+		manager.remove(manager.merge(t));
 
-		em.getTransaction().commit();
-		//em.close();
 	}
 
 	public void atualiza(T t) {
-		//EntityManager em = new JPAUtil().getEntityManager();
-		em.getTransaction().begin();
 
-		em.merge(t);
+		manager.merge(t);
 
-		em.getTransaction().commit();
-		//em.close();
 	}
 
 	public List<T> listaTodos() {
-		//EntityManager em = new JPAUtil().getEntityManager();
-		CriteriaQuery<T> query = em.getCriteriaBuilder().createQuery(classe);
+		// EntityManager manager = new JPAUtil().getEntityManager();
+		CriteriaQuery<T> query = manager.getCriteriaBuilder().createQuery(classe);
 		query.select(query.from(classe));
 
-		List<T> lista = em.createQuery(query).getResultList();
+		List<T> lista = manager.createQuery(query).getResultList();
 
-		//em.close();
+		// manager.close();
 		return lista;
 	}
 
 	public T buscaPorId(Integer id) {
-		//EntityManager em = new JPAUtil().getEntityManager();
-		T instancia = em.find(classe, id);
-		//em.close();
+		// EntityManager manager = new JPAUtil().getEntityManager();
+		T instancia = manager.find(classe, id);
+		// manager.close();
 		return instancia;
 	}
 
 	public int contaTodos() {
-		//EntityManager em = new JPAUtil().getEntityManager();
-		long result = (Long) em.createQuery("select count(n) from livro n")
-				.getSingleResult();
-		//em.close();
+		// EntityManager manager = new JPAUtil().getEntityManager();
+		long result = (Long) manager.createQuery("select count(n) from livro n").getSingleResult();
+		// manager.close();
 
 		return (int) result;
 	}
 
 	public List<T> listaTodosPaginada(int firstResult, int maxResults) {
-		//EntityManager em = new JPAUtil().getEntityManager();
-		CriteriaQuery<T> query = em.getCriteriaBuilder().createQuery(classe);
+		// EntityManager manager = new JPAUtil().getEntityManager();
+		CriteriaQuery<T> query = manager.getCriteriaBuilder().createQuery(classe);
 		query.select(query.from(classe));
 
-		List<T> lista = em.createQuery(query).setFirstResult(firstResult)
-				.setMaxResults(maxResults).getResultList();
+		List<T> lista = manager.createQuery(query).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
 
-		//em.close();
+		// manager.close();
 		return lista;
 	}
 

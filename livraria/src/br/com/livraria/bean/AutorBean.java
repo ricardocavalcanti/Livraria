@@ -12,6 +12,7 @@ import javax.inject.Named;
 import br.com.livraria.dao.AutorDao;
 import br.com.livraria.modelo.Autor;
 //Teste GitHub
+import br.com.livraria.tx.Transacional;
 
 //@ManagedBean
 @Named
@@ -39,7 +40,8 @@ public class AutorBean implements Serializable {
 	public void carregarAutorPelaId() {
 		this.autor = this.dao.buscaPorId(autorId);
 	}
-
+	
+	@Transacional
 	public String gravar() {
 		System.out.println("Gravando autor " + this.autor.getNome());
 
@@ -54,6 +56,7 @@ public class AutorBean implements Serializable {
 		return "livro?faces-redirect=true";
 	}
 	
+	@Transacional
 	public void remover(Autor autor) {
 		System.out.println("Removendo autor " + autor.getNome());
 		this.dao.remove(autor);
