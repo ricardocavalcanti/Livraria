@@ -1,5 +1,6 @@
 package br.com.livraria.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -8,16 +9,18 @@ import javax.persistence.EntityManager;
 
 import br.com.livraria.modelo.Autor;
 
-public class AutorDao {
+public class AutorDao implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	EntityManager em; // new  EntityManager
+	EntityManager manager; // new  EntityManager
 	private DAO<Autor> dao;
 	
 	@PostConstruct
 	void init() {
 		
-		this.dao = new DAO<Autor>(this.em, Autor.class);
+		this.dao = new DAO<Autor>(this.manager, Autor.class);
 	}
 
 	public Autor buscaPorId(Integer autorId) {
