@@ -18,15 +18,16 @@ import br.com.livraria.tx.Transacional;
 @Named
 @ViewScoped //java.faces.view.ViewScoped
 public class AutorBean implements Serializable {
+private static final long serialVersionUID = 1L;
 
-	private static final long serialVersionUID = 1L;
 
 	private Autor autor = new Autor();	
 	private Integer autorId;	
 	
 	
 	@Inject //Injecao de dependencias -  CDI faz  new AutorDao() e injeta
-	private AutorDao dao;	
+	private AutorDao dao;
+	
 	
 
 	public Integer getAutorId() {

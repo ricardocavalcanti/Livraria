@@ -20,20 +20,22 @@ import br.com.livraria.tx.Transacional;
 @Named
 @ViewScoped
 public class LivroBean implements Serializable {
+private static final long serialVersionUID = 1L;
 
-	private static final long serialVersionUID = 1L;
+
 
 	private Livro livro = new Livro();
-
 	private Integer autorId;
-
 	private List<Livro> livros;
 	
-	@Inject
-	LivroDao  livroDao;
 	
 	@Inject
+	LivroDao  livroDao;	
+	@Inject
 	AutorDao autorDao;
+	@Inject
+	FacesContext context;
+	
 
 	public void setAutorId(Integer autorId) {
 		this.autorId = autorId;
@@ -80,7 +82,7 @@ public class LivroBean implements Serializable {
 
 		
 		if (livro.getAutores().isEmpty()) {
-			FacesContext.getCurrentInstance().addMessage("autor",
+			context.addMessage("autor",
 					new FacesMessage("Livro deve ter pelo menos um Autor."));
 			return;
 		}
