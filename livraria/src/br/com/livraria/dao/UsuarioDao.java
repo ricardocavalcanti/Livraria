@@ -27,6 +27,7 @@ public class UsuarioDao implements Serializable {
 		query.setParameter("pEmail", usuario.getEmail());
 		query.setParameter("pSenha", usuario.getSenha());
 		try {
+			@SuppressWarnings("unused")
 			Usuario resultado =  query.getSingleResult();
 		} catch (NoResultException ex) {
 			return false;
